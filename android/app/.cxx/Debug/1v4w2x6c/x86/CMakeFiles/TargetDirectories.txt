@@ -1,0 +1,2 @@
+C:/Users/Phallyn/Program/ACLEDA BANK/takaful/android/app/.cxx/Debug/1v4w2x6c/x86/CMakeFiles/edit_cache.dir
+C:/Users/Phallyn/Program/ACLEDA BANK/takaful/android/app/.cxx/Debug/1v4w2x6c/x86/CMakeFiles/rebuild_cache.dir

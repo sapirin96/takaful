@@ -33,8 +33,7 @@ class _JoinABAPayViewState extends State<JoinABAPayView> {
         if (Platform.isAndroid) {
           _webViewController?.reload();
         } else if (Platform.isIOS) {
-          _webViewController?.loadUrl(
-              urlRequest: URLRequest(url: await _webViewController?.getUrl()));
+          _webViewController?.loadUrl(urlRequest: URLRequest(url: await _webViewController?.getUrl()));
         }
       },
     );
@@ -75,8 +74,7 @@ class _JoinABAPayViewState extends State<JoinABAPayView> {
                 return InAppWebView(
                   key: webViewKey,
                   initialUrlRequest: URLRequest(
-                    url: Uri.parse(
-                        '${ApiService.baseUrl}insurance/payway/join?payment_method_code=abapay'),
+                    url: WebUri('${ApiService.baseUrl}insurance/payway/join?payment_method_code=abapay'),
                     headers: {
                       'Accept': 'application/json',
                       'authorization': "Bearer ${snapshot.data}",
@@ -130,10 +128,8 @@ class _JoinABAPayViewState extends State<JoinABAPayView> {
                   },
 
                   /// check if user click on continue button on iOS
-                  iosOnNavigationResponse: (webViewController,
-                      IOSWKNavigationResponse navigationResponse) async {
-                    if (navigationResponse.response?.url.toString() ==
-                        'https://portal.takafulcambodia.org/') {
+                  iosOnNavigationResponse: (webViewController, IOSWKNavigationResponse navigationResponse) async {
+                    if (navigationResponse.response?.url.toString() == 'https://portal.takafulcambodia.org/') {
                       Get.offAll(() => const JoinSuccessView());
                       return IOSNavigationResponseAction.CANCEL;
                     }
@@ -141,10 +137,8 @@ class _JoinABAPayViewState extends State<JoinABAPayView> {
                   },
 
                   /// check if user click on continue button on android
-                  androidShouldInterceptRequest:
-                      (webViewController, WebResourceRequest request) async {
-                    if (request.url.toString() ==
-                        'https://portal.takafulcambodia.org/') {
+                  androidShouldInterceptRequest: (webViewController, WebResourceRequest request) async {
+                    if (request.url.toString() == 'https://portal.takafulcambodia.org/') {
                       Get.offAll(() => const JoinSuccessView());
                     }
                     return null;

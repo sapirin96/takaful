@@ -9,11 +9,14 @@ import 'package:takaful/utils/catcher_util.dart';
 class ConnectivityService extends GetxService {
   final connectionStatus = Rx<ConnectivityResult>(ConnectivityResult.none);
   final Connectivity _connectivity = Connectivity();
-  late StreamSubscription<ConnectivityResult> _connectivitySubscription;
+  late StreamSubscription<List<ConnectivityResult>> _connectivitySubscription;
 
   Future<ConnectivityService> init() async {
     await initConnectivity();
-    _connectivitySubscription = _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
+    _connectivitySubscription = _connectivity.onConnectivityChanged.listen((results) {
+      final result = results.isNotEmpty ? results.first : ConnectivityResult.none;
+      _updateConnectionStatus(result);
+    });
     return this;
   }
 
@@ -26,7 +29,8 @@ class ConnectivityService extends GetxService {
   Future<void> initConnectivity() async {
     late ConnectivityResult result;
     try {
-      result = await _connectivity.checkConnectivity();
+      final results = await _connectivity.checkConnectivity();
+      result = results.isNotEmpty ? results.first : ConnectivityResult.none;
     } on PlatformException catch (error, stackTrace) {
       CatcherUtil.report(error, stackTrace);
       return;

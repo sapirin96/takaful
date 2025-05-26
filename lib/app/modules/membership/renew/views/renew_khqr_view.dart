@@ -45,8 +45,7 @@ class _RenewKHQRViewState extends State<RenewKHQRView> {
         if (Platform.isAndroid) {
           _webViewController?.reload();
         } else if (Platform.isIOS) {
-          _webViewController?.loadUrl(
-              urlRequest: URLRequest(url: await _webViewController?.getUrl()));
+          _webViewController?.loadUrl(urlRequest: URLRequest(url: await _webViewController?.getUrl()));
         }
       },
     );
@@ -87,7 +86,7 @@ class _RenewKHQRViewState extends State<RenewKHQRView> {
                 return InAppWebView(
                   key: webViewKey,
                   initialUrlRequest: URLRequest(
-                    url: Uri.parse(widget.checkoutUrl),
+                    url: WebUri(widget.checkoutUrl),
                     headers: {
                       'Accept': 'application/json',
                       'authorization': "Bearer ${snapshot.data}",
@@ -141,24 +140,18 @@ class _RenewKHQRViewState extends State<RenewKHQRView> {
                   },
 
                   /// check if user click on continue button on iOS
-                  iosOnNavigationResponse: (webViewController,
-                      IOSWKNavigationResponse navigationResponse) async {
-                    if (navigationResponse.response?.url.toString() ==
-                        'https://portal.takafulcambodia.org/') {
-                      Get.off(() =>
-                          RenewSuccessView(subscription: widget.subscription));
+                  iosOnNavigationResponse: (webViewController, IOSWKNavigationResponse navigationResponse) async {
+                    if (navigationResponse.response?.url.toString() == 'https://portal.takafulcambodia.org/') {
+                      Get.off(() => RenewSuccessView(subscription: widget.subscription));
                       return IOSNavigationResponseAction.CANCEL;
                     }
                     return IOSNavigationResponseAction.ALLOW;
                   },
 
                   /// check if user click on continue button on android
-                  androidShouldInterceptRequest:
-                      (webViewController, WebResourceRequest request) async {
-                    if (request.url.toString() ==
-                        'https://portal.takafulcambodia.org/') {
-                      Get.off(() =>
-                          RenewSuccessView(subscription: widget.subscription));
+                  androidShouldInterceptRequest: (webViewController, WebResourceRequest request) async {
+                    if (request.url.toString() == 'https://portal.takafulcambodia.org/') {
+                      Get.off(() => RenewSuccessView(subscription: widget.subscription));
                     }
                     return null;
                   },

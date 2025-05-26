@@ -36,8 +36,7 @@ class _DonatePayWayViewState extends State<DonatePayWayView> {
         if (Platform.isAndroid) {
           _webViewController?.reload();
         } else if (Platform.isIOS) {
-          _webViewController?.loadUrl(
-              urlRequest: URLRequest(url: await _webViewController?.getUrl()));
+          _webViewController?.loadUrl(urlRequest: URLRequest(url: await _webViewController?.getUrl()));
         }
       },
     );
@@ -78,8 +77,7 @@ class _DonatePayWayViewState extends State<DonatePayWayView> {
                 return InAppWebView(
                   key: webViewKey,
                   initialUrlRequest: URLRequest(
-                    url: Uri.parse(
-                        '${ApiService.baseUrl}insurance/payway/donate?payment_method_code=cards&donation_uuid=${widget.donation.uuid}'),
+                    url: WebUri('${ApiService.baseUrl}insurance/payway/donate?payment_method_code=cards&donation_uuid=${widget.donation.uuid}'),
                     headers: {
                       'Accept': 'application/json',
                       'authorization': "Bearer ${snapshot.data}",
@@ -102,8 +100,7 @@ class _DonatePayWayViewState extends State<DonatePayWayView> {
                       useShouldInterceptAjaxRequest: true,
                       useShouldInterceptFetchRequest: true,
                       incognito: false,
-                      userAgent:
-                          "Mozilla/5.0 (Linux; Android 9; LG-H870 Build/PKQ1.190522.001) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/83.0.4103.106 Mobile Safari/537.36",
+                      userAgent: "Mozilla/5.0 (Linux; Android 9; LG-H870 Build/PKQ1.190522.001) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/83.0.4103.106 Mobile Safari/537.36",
                       allowFileAccessFromFileURLs: true,
                       allowUniversalAccessFromFileURLs: true,
                     ),
@@ -141,22 +138,17 @@ class _DonatePayWayViewState extends State<DonatePayWayView> {
                   },
 
                   /// check if user click on continue button on iOS
-                  iosOnNavigationResponse: (webViewController,
-                      IOSWKNavigationResponse navigationResponse) async {
-                    if (navigationResponse.response?.url.toString() ==
-                        'https://portal.takafulcambodia.org/') {
-                      Get.off(
-                          () => DonateSuccessView(donation: widget.donation));
+                  iosOnNavigationResponse: (webViewController, IOSWKNavigationResponse navigationResponse) async {
+                    if (navigationResponse.response?.url.toString() == 'https://portal.takafulcambodia.org/') {
+                      Get.off(() => DonateSuccessView(donation: widget.donation));
                       return IOSNavigationResponseAction.CANCEL;
                     }
                     return IOSNavigationResponseAction.ALLOW;
                   },
 
                   /// check if user click on continue button on android
-                  androidShouldInterceptRequest:
-                      (webViewController, WebResourceRequest request) async {
-                    if (request.url.toString() ==
-                        'https://portal.takafulcambodia.org/') {
+                  androidShouldInterceptRequest: (webViewController, WebResourceRequest request) async {
+                    if (request.url.toString() == 'https://portal.takafulcambodia.org/') {
                       Get.off(
                         () => DonateSuccessView(donation: widget.donation),
                       );

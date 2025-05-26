@@ -36,8 +36,7 @@ class _DonateABAPayViewState extends State<DonateABAPayView> {
         if (Platform.isAndroid) {
           _webViewController?.reload();
         } else if (Platform.isIOS) {
-          _webViewController?.loadUrl(
-              urlRequest: URLRequest(url: await _webViewController?.getUrl()));
+          _webViewController?.loadUrl(urlRequest: URLRequest(url: await _webViewController?.getUrl()));
         }
       },
     );
@@ -78,8 +77,7 @@ class _DonateABAPayViewState extends State<DonateABAPayView> {
                 return InAppWebView(
                   key: webViewKey,
                   initialUrlRequest: URLRequest(
-                    url: Uri.parse(
-                        '${ApiService.baseUrl}insurance/payway/donate?payment_method_code=abapay&donation_uuid=${widget.donation.uuid}'),
+                    url: WebUri('${ApiService.baseUrl}insurance/payway/donate?payment_method_code=abapay&donation_uuid=${widget.donation.uuid}'),
                     headers: {
                       'Accept': 'application/json',
                       'authorization': "Bearer ${snapshot.data}",
@@ -133,24 +131,18 @@ class _DonateABAPayViewState extends State<DonateABAPayView> {
                   },
 
                   /// check if user click on continue button on iOS
-                  iosOnNavigationResponse: (webViewController,
-                      IOSWKNavigationResponse navigationResponse) async {
-                    if (navigationResponse.response?.url.toString() ==
-                        'https://portal.takafulcambodia.org/') {
-                      Get.off(
-                          () => DonateSuccessView(donation: widget.donation));
+                  iosOnNavigationResponse: (webViewController, IOSWKNavigationResponse navigationResponse) async {
+                    if (navigationResponse.response?.url.toString() == 'https://portal.takafulcambodia.org/') {
+                      Get.off(() => DonateSuccessView(donation: widget.donation));
                       return IOSNavigationResponseAction.CANCEL;
                     }
                     return IOSNavigationResponseAction.ALLOW;
                   },
 
                   /// check if user click on continue button on android
-                  androidShouldInterceptRequest:
-                      (webViewController, WebResourceRequest request) async {
-                    if (request.url.toString() ==
-                        'https://portal.takafulcambodia.org/') {
-                      Get.off(
-                          () => DonateSuccessView(donation: widget.donation));
+                  androidShouldInterceptRequest: (webViewController, WebResourceRequest request) async {
+                    if (request.url.toString() == 'https://portal.takafulcambodia.org/') {
+                      Get.off(() => DonateSuccessView(donation: widget.donation));
                     }
                     return null;
                   },

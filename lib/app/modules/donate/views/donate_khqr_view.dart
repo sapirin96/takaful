@@ -14,11 +14,7 @@ class DonateKHQRView extends StatefulWidget {
   final String checkoutUrl;
   final String deepLink;
   final DonationModel donation;
-  const DonateKHQRView(
-      {super.key,
-      required this.checkoutUrl,
-      required this.donation,
-      required this.deepLink});
+  const DonateKHQRView({super.key, required this.checkoutUrl, required this.donation, required this.deepLink});
 
   @override
   State<DonateKHQRView> createState() => _DonateKHQRViewState();
@@ -44,8 +40,7 @@ class _DonateKHQRViewState extends State<DonateKHQRView> {
         if (Platform.isAndroid) {
           _webViewController?.reload();
         } else if (Platform.isIOS) {
-          _webViewController?.loadUrl(
-              urlRequest: URLRequest(url: await _webViewController?.getUrl()));
+          _webViewController?.loadUrl(urlRequest: URLRequest(url: await _webViewController?.getUrl()));
         }
       },
     );
@@ -86,7 +81,7 @@ class _DonateKHQRViewState extends State<DonateKHQRView> {
                 return InAppWebView(
                   key: webViewKey,
                   initialUrlRequest: URLRequest(
-                    url: Uri.parse(widget.checkoutUrl),
+                    url: WebUri(widget.checkoutUrl),
                     headers: {
                       'Accept': 'application/json',
                       'authorization': "Bearer ${snapshot.data}",
@@ -140,24 +135,18 @@ class _DonateKHQRViewState extends State<DonateKHQRView> {
                   },
 
                   /// check if user click on continue button on iOS
-                  iosOnNavigationResponse: (webViewController,
-                      IOSWKNavigationResponse navigationResponse) async {
-                    if (navigationResponse.response?.url.toString() ==
-                        'https://portal.takafulcambodia.org/') {
-                      Get.off(
-                          () => DonateSuccessView(donation: widget.donation));
+                  iosOnNavigationResponse: (webViewController, IOSWKNavigationResponse navigationResponse) async {
+                    if (navigationResponse.response?.url.toString() == 'https://portal.takafulcambodia.org/') {
+                      Get.off(() => DonateSuccessView(donation: widget.donation));
                       return IOSNavigationResponseAction.CANCEL;
                     }
                     return IOSNavigationResponseAction.ALLOW;
                   },
 
                   /// check if user click on continue button on android
-                  androidShouldInterceptRequest:
-                      (webViewController, WebResourceRequest request) async {
-                    if (request.url.toString() ==
-                        'https://portal.takafulcambodia.org/') {
-                      Get.off(
-                          () => DonateSuccessView(donation: widget.donation));
+                  androidShouldInterceptRequest: (webViewController, WebResourceRequest request) async {
+                    if (request.url.toString() == 'https://portal.takafulcambodia.org/') {
+                      Get.off(() => DonateSuccessView(donation: widget.donation));
                     }
                     return null;
                   },

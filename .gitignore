@@ -1,0 +1,7 @@
+.flutter-plugins
+.flutter-plugins-dependencies
+.fvmrc
+.fvm/
+.dart_tool/
+# Build outputs
+build/

@@ -17,8 +17,7 @@ class HomeCarouselView extends StatefulWidget {
   State<HomeCarouselView> createState() => _HomeCarouselViewState();
 }
 
-class _HomeCarouselViewState extends State<HomeCarouselView>
-    with AutomaticKeepAliveClientMixin<HomeCarouselView> {
+class _HomeCarouselViewState extends State<HomeCarouselView> with AutomaticKeepAliveClientMixin<HomeCarouselView> {
   Future<List<SlideShowModel>>? slideShowFuture;
 
   @override
@@ -93,8 +92,7 @@ class _HomeCarouselViewState extends State<HomeCarouselView>
                         onTap: () async {
                           if (item.uuid == null) return;
 
-                          bool? success =
-                              await SlideShowProvider.count(uuid: item.uuid!);
+                          bool? success = await SlideShowProvider.count(uuid: item.uuid!);
 
                           if (success == true) {
                             _launchURL('${item.callbackUrl}');
@@ -123,10 +121,7 @@ class _HomeCarouselViewState extends State<HomeCarouselView>
                                   child: Text(
                                     '${item.excerpt}',
                                     maxLines: 2,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodySmall
-                                        ?.copyWith(
+                                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
                                           color: ColorConfig.white,
                                           height: 1.5,
                                         ),

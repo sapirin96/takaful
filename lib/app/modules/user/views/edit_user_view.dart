@@ -4,7 +4,7 @@ import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:get/route_manager.dart';
 import 'package:get/utils.dart';
 import 'package:keyboard_actions/keyboard_actions.dart';
-import 'package:skeletons/skeletons.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../../../../components/primary_button_component.dart';
 import '../../../../../components/primary_card_component.dart';
@@ -24,8 +24,7 @@ class EditUserView extends StatefulWidget {
   State<EditUserView> createState() => _EditUserViewState();
 }
 
-class _EditUserViewState extends State<EditUserView>
-    with AutomaticKeepAliveClientMixin<EditUserView> {
+class _EditUserViewState extends State<EditUserView> with AutomaticKeepAliveClientMixin<EditUserView> {
   final _formKey = GlobalKey<FormBuilderState>();
   final FocusNode _nameFocusNode = FocusNode();
   final FocusNode _emailFocusNode = FocusNode();
@@ -105,8 +104,7 @@ class _EditUserViewState extends State<EditUserView>
                                 labelText: 'Name'.tr,
                               ),
                               validator: FormBuilderValidators.compose([
-                                FormBuilderValidators.required(
-                                    errorText: 'This field is required'.tr),
+                                FormBuilderValidators.required(errorText: 'This field is required'.tr),
                               ]),
                               focusNode: _nameFocusNode,
                             ),
@@ -116,17 +114,14 @@ class _EditUserViewState extends State<EditUserView>
                                 labelText: 'Email'.tr,
                               ),
                               validator: FormBuilderValidators.compose([
-                                FormBuilderValidators.required(
-                                    errorText: 'This field is required'.tr),
+                                FormBuilderValidators.required(errorText: 'This field is required'.tr),
                                 FormBuilderValidators.email(),
                               ]),
                               focusNode: _emailFocusNode,
                             ),
                             ConditionalBuilder(
-                              condition: widget.user.role?.toLowerCase() !=
-                                  'administrator',
-                              builder: (_) =>
-                                  FutureBuilder<List<Map<String, dynamic>>>(
+                              condition: widget.user.role?.toLowerCase() != 'administrator',
+                              builder: (_) => FutureBuilder<List<Map<String, dynamic>>>(
                                 future: rolesFuture,
                                 builder: (context, snapshot) {
                                   if (snapshot.hasData) {
@@ -138,8 +133,7 @@ class _EditUserViewState extends State<EditUserView>
                                       items: snapshot.data!.map((role) {
                                         return DropdownMenuItem(
                                           value: role['id'],
-                                          child: Text(
-                                              "${'${role["name"]}'.capitalizeFirst}"),
+                                          child: Text("${'${role["name"]}'.capitalizeFirst}"),
                                         );
                                       }).toList(),
                                     );
@@ -149,11 +143,14 @@ class _EditUserViewState extends State<EditUserView>
                                     height: 40,
                                     width: Get.width,
                                     margin: const EdgeInsets.only(top: 10),
-                                    child: SkeletonAvatar(
-                                      style: SkeletonAvatarStyle(
+                                    child: Skeletonizer(
+                                      child: Container(
                                         width: double.infinity,
                                         height: 40,
-                                        borderRadius: BorderRadius.circular(5),
+                                        decoration: BoxDecoration(
+                                          color: Colors.grey[300],
+                                          borderRadius: BorderRadius.circular(5),
+                                        ),
                                       ),
                                     ),
                                   );
@@ -189,9 +186,7 @@ class _EditUserViewState extends State<EditUserView>
                                   labelText: 'Password'.tr,
                                   suffixIcon: IconButton(
                                     icon: Icon(
-                                      _obscureText
-                                          ? Icons.visibility
-                                          : Icons.visibility_off,
+                                      _obscureText ? Icons.visibility : Icons.visibility_off,
                                     ),
                                     onPressed: () {
                                       setState(() {
@@ -202,13 +197,8 @@ class _EditUserViewState extends State<EditUserView>
                                 ),
                                 validator: _editPassword == true
                                     ? FormBuilderValidators.compose([
-                                        FormBuilderValidators.required(
-                                            errorText:
-                                                'This field is required'.tr),
-                                        FormBuilderValidators.minLength(8,
-                                            errorText:
-                                                'Password must be at least 8 characters'
-                                                    .tr),
+                                        FormBuilderValidators.required(errorText: 'This field is required'.tr),
+                                        FormBuilderValidators.minLength(8, errorText: 'Password must be at least 8 characters'.tr),
                                       ])
                                     : null,
                                 obscureText: _obscureText,
@@ -239,9 +229,7 @@ class _EditUserViewState extends State<EditUserView>
                         _isLoading = true;
                       });
 
-                      Map<String, dynamic> data = {
-                        ..._formKey.currentState!.value
-                      };
+                      Map<String, dynamic> data = {..._formKey.currentState!.value};
 
                       UserModel? user = await UserProvider.update(
                         widget.user.uuid!,

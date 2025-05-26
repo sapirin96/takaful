@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pdf_render/pdf_render_widgets.dart';
+import 'package:pdfrx/pdfrx.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:takaful/app/services/setting_service.dart';
 import 'package:takaful/components/primary_button_component.dart';
@@ -30,7 +30,7 @@ class MembershipView extends GetView<MembershipController> {
           ),
         ],
       ),
-      body: PdfViewer.openAsset('lib/assets/pdf/policy.pdf'),
+      body: PdfViewer.asset('lib/assets/pdf/policy.pdf'),
 
       /// add sign up button
       bottomNavigationBar: Obx(

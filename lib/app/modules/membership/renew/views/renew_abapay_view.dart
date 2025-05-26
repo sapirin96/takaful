@@ -78,7 +78,7 @@ class _RenewABAPayViewState extends State<RenewABAPayView> {
                 return InAppWebView(
                   key: webViewKey,
                   initialUrlRequest: URLRequest(
-                    url: Uri.parse(
+                    url: WebUri(
                         '${ApiService.baseUrl}insurance/payway/renew?payment_method_code=abapay&subscription_uuid=${widget.subscription.uuid}'),
                     headers: {
                       'Accept': 'application/json',
