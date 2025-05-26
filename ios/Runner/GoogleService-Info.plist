@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>1080925159936-m1mmd37dgeq9h89np2lrbq6pc5juekuj.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.1080925159936-m1mmd37dgeq9h89np2lrbq6pc5juekuj</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAz3kiLbb_acO3Q2AWjNvPTKzHdveN-1Vc</string>
+	<key>GCM_SENDER_ID</key>
+	<string>1080925159936</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>org.takafulcambodia.app</string>
+	<key>PROJECT_ID</key>
+	<string>takaful-org</string>
+	<key>STORAGE_BUCKET</key>
+	<string>takaful-org.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:1080925159936:ios:cef7fcff3af54455448ee5</string>
+</dict>
+</plist>

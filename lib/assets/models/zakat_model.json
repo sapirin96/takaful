@@ -1,0 +1,19 @@
+{
+  "id": 1,
+  "uuid": "uuid",
+  "gold": "10.0",
+  "silver": "10.0",
+  "cash_on_hand": "10.0",
+  "cash_in_bank": "10.0",
+  "investment": "10.0",
+  "stock": "10.0",
+  "receivable": "10.0",
+  "payable": "10.0",
+  "asset": "10.0",
+  "nisab": "10.0",
+  "zakat": "10.0",
+  "formatted_created_at": "10th Jan 2022",
+  "formatted_updated_at": "10th Jan 2022",
+  "name": "Lim Socheat",
+  "email": "limsocheat111@gmail.com"
+}

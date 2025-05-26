@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "1080925159936",
+    "project_id": "takaful-org",
+    "storage_bucket": "takaful-org.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1080925159936:android:1f8adb312b756eef448ee5",
+        "android_client_info": {
+          "package_name": "org.takafulcambodia.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1080925159936-h07h19jnkriqca5r7prcm0e87vhb5oqs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAoYB6Vjk2m4-m72JOgd72VIETQh3pAqpw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1080925159936-h07h19jnkriqca5r7prcm0e87vhb5oqs.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1080925159936-80fpm4q5sodcpoi4udvc2ltvppajl7ep.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.takafulcambodia.app"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1080925159936:android:569ad622e3f9f7fd448ee5",
+        "android_client_info": {
+          "package_name": "org.takafulcambodia.takaful"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1080925159936-h07h19jnkriqca5r7prcm0e87vhb5oqs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAoYB6Vjk2m4-m72JOgd72VIETQh3pAqpw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1080925159936-h07h19jnkriqca5r7prcm0e87vhb5oqs.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1080925159936-80fpm4q5sodcpoi4udvc2ltvppajl7ep.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.takafulcambodia.app"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
