@@ -25,8 +25,7 @@ class HomeMenuView extends StatefulWidget {
   State<HomeMenuView> createState() => _HomeMenuViewState();
 }
 
-class _HomeMenuViewState extends State<HomeMenuView>
-    with AutomaticKeepAliveClientMixin<HomeMenuView> {
+class _HomeMenuViewState extends State<HomeMenuView> with AutomaticKeepAliveClientMixin<HomeMenuView> {
   @override
   Widget build(BuildContext context) {
     super.build(context);
@@ -51,8 +50,7 @@ class _HomeMenuViewState extends State<HomeMenuView>
       child: Obx(() {
         String? roleName = Get.find<AuthService>().user.value?.roleName;
 
-        if (roleName?.toLowerCase() == "administrator" ||
-            roleName?.toLowerCase() == "staff") {
+        if (roleName?.toLowerCase() == "administrator" || roleName?.toLowerCase() == "staff") {
           return Column(
             children: [
               SizedBox(
@@ -88,8 +86,7 @@ class _HomeMenuViewState extends State<HomeMenuView>
           );
         }
 
-        if (roleName?.toLowerCase() == "agency" ||
-            roleName?.toLowerCase() == "super_agency") {
+        if (roleName?.toLowerCase() == "agency" || roleName?.toLowerCase() == "super_agency") {
           return Column(
             children: [
               SizedBox(
@@ -135,8 +132,7 @@ class _HomeMenuViewState extends State<HomeMenuView>
                 children: [
                   Obx(
                     () => ConditionalBuilder(
-                      condition:
-                          Get.find<SettingService>().isMember.value == false,
+                      condition: Get.find<SettingService>().isMember.value == false,
                       builder: (_) => const HomeJoinMenu(),
                       fallback: (_) => const HomeMembershipPolicyMenu(),
                     ),
@@ -200,13 +196,9 @@ class HomeDonationMenu extends StatelessWidget {
             onTap: () async {
               if (Platform.isIOS) {
                 /// open safari
-                Uri donationUri = Uri(
-                    scheme: 'https',
-                    host: 'portal.takafulcambodia.org',
-                    path: '/takaful/donations');
+                Uri donationUri = Uri(scheme: 'https', host: 'portal.takafulcambodia.org', path: '/takaful/donations');
                 if (await canLaunchUrl(donationUri)) {
-                  await launchUrl(donationUri,
-                      mode: LaunchMode.externalApplication);
+                  await launchUrl(donationUri, mode: LaunchMode.externalApplication);
                 }
               } else {
                 Get.toNamed(Routes.DONATE);
@@ -638,8 +630,7 @@ class HomeMembershipPolicyMenu extends StatefulWidget {
   });
 
   @override
-  State<HomeMembershipPolicyMenu> createState() =>
-      _HomeMembershipPolicyMenuState();
+  State<HomeMembershipPolicyMenu> createState() => _HomeMembershipPolicyMenuState();
 }
 
 class _HomeMembershipPolicyMenuState extends State<HomeMembershipPolicyMenu> {
@@ -673,8 +664,7 @@ class _HomeMembershipPolicyMenuState extends State<HomeMembershipPolicyMenu> {
                     loading = true;
                   });
 
-                  MemberModel? member = await MemberProvider.show(
-                      Get.find<AuthService>().user.value!.uuid!);
+                  MemberModel? member = await MemberProvider.show(Get.find<AuthService>().user.value?.uuid ?? '');
 
                   if (member != null) {
                     Get.to(() => ViewMemberView(member: member));
@@ -742,14 +732,12 @@ class HomeMembersMenu extends StatelessWidget {
           child: InkWell(
             onTap: () {
               final auth = Get.find<AuthService>();
-              if (auth.user.value?.roleName?.toLowerCase() == "administrator" ||
-                  auth.user.value?.roleName?.toLowerCase() == "staff") {
+              if (auth.user.value?.roleName?.toLowerCase() == "administrator" || auth.user.value?.roleName?.toLowerCase() == "staff") {
                 Get.toNamed(Routes.AGENCY, arguments: {
                   'isSuperAgency': true,
                   'isAgency': false,
                 });
-              } else if (auth.user.value?.roleName?.toLowerCase() ==
-                  "super_agency") {
+              } else if (auth.user.value?.roleName?.toLowerCase() == "super_agency") {
                 Get.toNamed(Routes.AGENCY, arguments: {
                   'isSuperAgency': false,
                   'isAgency': true,

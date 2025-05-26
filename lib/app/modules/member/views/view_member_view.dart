@@ -14,8 +14,7 @@ class ViewMemberView extends StatefulWidget {
   State<ViewMemberView> createState() => _ViewMemberViewState();
 }
 
-class _ViewMemberViewState extends State<ViewMemberView>
-    with AutomaticKeepAliveClientMixin<ViewMemberView> {
+class _ViewMemberViewState extends State<ViewMemberView> with AutomaticKeepAliveClientMixin<ViewMemberView> {
   @override
   Widget build(BuildContext context) {
     super.build(context);
@@ -28,8 +27,7 @@ class _ViewMemberViewState extends State<ViewMemberView>
           actions: [
             IconButton(
               onPressed: () async {
-                bool? success =
-                    await Get.to(() => EditMemberView(member: widget.member));
+                bool? success = await Get.to(() => EditMemberView(member: widget.member));
                 if (success != null && success) {
                   setState(() {});
                 }
